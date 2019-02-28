@@ -77,7 +77,7 @@ while True:
         print('Incredible! Amazing! Wonderful! Congrats, you actually won! Who would have said it...')
 
     # Choose to exit or restart the program
-    exit_option = input('What would you like to do next? To try again, type AGAIN. To exit, type EXIT')
+    exit_option = input('What would you like to do next? To try again, type AGAIN. To exit, type EXIT ')
     while exit_option not in ['AGAIN', 'EXIT']:
         exit_option = input('Please only type the word AGAIN or the word EXIT all in capital letters: ')
     if exit_option == 'AGAIN':
