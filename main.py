@@ -2,14 +2,17 @@
 host_word = input('Roses are red, Violets are blue... What are you!? Where are you!?\nAs the master player \"Host\" you will have the important task of choosing the letter that the players will have to guess! Now choose a letter: ')
 n_pieces_left = 7
 
-#Easter eggs
+# Easter eggs
 if host_word in ['penguin', 'Penguin', 'human', 'Human', 'ironhack', 'Ironhack']:
     print('Congrats! You have found the hidden easter egg! You are awesome!')
     exit()
 
-# Checks if input is in alphabet and only one character (one letter)
-while (not host_word.isalpha()) or len(host_word) > 1 or len(host_word) == 0:
-    host_word = input('Please rember to only type 1 letter. Not a number, not a phrase, just a letter. Try again! ')
+# Checks if input is in alphabet and at least 1 letter for 100 times, if problem persists exit
+for i in range(100):
+    if not host_word.isalpha() or len(host_word) == 0:
+        host_word = input('Please remember to only one word. Not a number, not a phrase, just a word. Try again! ')
+if not host_word.isalpha() or len(host_word) == 0:
+    exit()
 
 # Make input lower case
 host_word.lower()
@@ -39,13 +42,19 @@ def turn(guess, correct_guesses, n_pieces_left):
     # Variables to do updates
     correct_guesses_out = correct_guesses
 
-    if guess in correct_guesses: # If letter has already been guessed ask for a new letter
-        while guess in correct_guesses:
-            guess = print('This letter has already been guessed! Please type a new one :) ')
-    if guess in host_word: # If letter hasn't been guessed and is correct save it in the correct index in correct_guesses
+    if guess in correct_guesses: # If letter has already been guessed ask for a new letter 100 times, if problem persists exit
+        for i in range(100):
+            guess = input('This letter has already been guessed! Please type a new one :) ')
+            if guess not in correct_guesses:
+                break
+        if guess in correct_guesses:
+            print('Maximum times of tries reached. Exiting now.')
+            exit()
+
+    if guess in host_word:  # If letter hasn't been guessed and is correct save it in the correct index in correct_guesses
         for index, char in enumerate(host_word):
             if char == guess:
-                correct_guesses_out[index] = guess # Update correct_guesses_out
+                correct_guesses_out[index] = guess  # Update correct_guesses_out
         return correct_guesses_out, n_pieces_left
     else: # If letter hasn't been guessed and is incorrect draw the corresponding hangman piece and substract one to n_pieces_left
         print('The host draws a: ' + hangman_parts[n_pieces_left])
@@ -54,19 +63,26 @@ def turn(guess, correct_guesses, n_pieces_left):
 # Tell players how many letters the host_word has
 print('The host has chosen a word with ' + str(len(host_word)) + ' letters in it')
 
-# While there isn't a clear winner or losser continue asking for letters and runnning turns
-while(not player_won() and not player_lost()):
-    guess = input('Please type the letter you think is in the hosts word: ')
+# For 100 times, if there isn't a clear winner or losser continue asking for letters and runnning turns
+for i in range(100):
+    if not player_won() and not player_lost():
+        guess = input('Please type the letter you think is in the hosts word: ')
 
-    # Checks if input is in alphabet and only one character (one letter)
-    while (not guess.isalpha()) or len(guess) > 1 or len(guess) == 0:
-        host_word = input('Please remember to only type 1 letter. Not a number, not a phrase, just a letter. Try again! ')
+        # Checks if input is in alphabet and only one character (one letter) for 100 times, the exits if persists
+        for ii in range(100):
+            if not guess.isalpha() or len(guess) > 1 or len(guess) == 0:
+                guess = input('Please remember to only type 1 letter. Not a number, not a phrase, just a letter. Try again! ')
+        if not guess.isalpha() or len(guess) > 1 or len(guess) == 0:
+            print('Maximum times of tries reached. Exiting now.')
+            exit()
 
-    # Make input lower case
-    host_word.lower()
+        # Make input lower case
+        guess.lower()
 
-    # Run a turn with the guess and update correct_guesses and n_pieces_left
-    correct_guesses, n_pieces_left = turn(guess, correct_guesses, n_pieces_left)
+        # Run a turn with the guess and update correct_guesses and n_pieces_left
+        correct_guesses, n_pieces_left = turn(guess, correct_guesses, n_pieces_left)
+    else:
+        break
 
 # Print message depending if the player won or host won
 if player_lost():
