@@ -2,7 +2,9 @@
 import turtle
 
 # List of english words
-english_words = ['back', 'cheeks', 'chest', 'chin', 'ears', 'eyebrows', 'eyes', 'feet', 'fingers', 'foot', 'forehead', 'hair', 'hands', 'head', 'hips', 'knees', 'legs', 'lips', 'mouth', 'neck' , 'nose<', 'shoulders', 'teeth', 'stomach', 'teeth', 'throat', 'toes', 'tongue', 'tooth', 'waist']
+english_words = ['back', 'cheeks', 'chest', 'chin', 'ears', 'eyebrows', 'eyes', 'feet', 'fingers', 'foot', 'forehead', 'hair', 'hands', 'head', 'hips', 'knees', 'legs', 'lips', 'mouth', 'neck' , 'nose<', 'shoulders', 'teeth', 'stomach', 'teeth', 'throat', 'toes', 'tongue', 'tooth', 'waist'
+                 'alligator', 'ant', 'bear', 'bee', 'bird', 'camel', 'cat', 'cheetah', 'chicken', 'chimpanzee', 'cow', 'crocodile', 'deer', 'dog', 'dolphin', 'duck', 'eagle', 'elephant', 'fish', 'fly', 'fox', 'frog', 'giraffe', 'goat', 'goldfish', 'hamster', 'hippopotamus', 'horse', 'kangaroo', 'kitten', 'lion', 'lobster', 'monkey', 'octopus', 'owl', 'panda', 'pig', 'puppy', 'rabbit', 'rat', 'scorpion', 'seal', 'shark', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'tiger', 'turtle', 'wolf', 'zebra',
+                 ]
 
 # Host word variable and number of hangman pieces left variable
 host_word = input('Roses are red, Violets are blue... What are you!? Where are you!?\nAs the master player \"Host\" you will have the important task of choosing the word that the players will have to guess! Now choose a word: ')
