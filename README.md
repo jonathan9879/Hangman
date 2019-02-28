@@ -22,3 +22,17 @@ To make this program simpler version 1.0 will work only with one letter instead 
 - The machine draws the hangman instead of giving the info written.
 - The players can use speech recognition as an input.
 - Check for existence of word in the dictionary.
+
+## Variables
+- host_word: Stores a string with the word/letter/phrase choseen by the host
+
+- n_pieces_left: Stores the number of tries left before the players loose and the host wins. It will always starts at 8.
+
+- correct_guesses: Stores a list that contains all the letters that have been already succsesfully guessed. It's length is the same is host_word.
+
+## Functions
+- process_turn(letter): It inputs a letter choosen by a player. If the letter has already been discovered it asks again for a letter. If it hasn't been discovered yet and it is a correct guess, it saves the letter in it's corresponding index in correct_guesses (if no letters to dicover the player has won). If the letter is a wrong guess, it draws the corresponding hangman part (if no parts left the player has lost). It returns None.
+
+- player_lost(): If there aren't more hangman parts to draw return True. Else return False.
+
+- player_won(): If there aren't more letters to discover return True. Else return False.
