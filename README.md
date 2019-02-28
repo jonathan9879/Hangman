@@ -26,7 +26,7 @@ To make this program simpler version 1.0 will work only with one letter instead 
 ## Variables
 - host_word: Stores a string with the word/letter/phrase choseen by the host
 
-- n_pieces_left: Stores the number of tries left before the players loose and the host wins. It will always starts at 8.
+- n_pieces_left: Stores the number of tries left before the players loose and the host wins. It will always starts at 7.
 
 - correct_guesses: Stores a list that contains all the letters that have been already succsesfully guessed. It's length is the same is host_word.
 
