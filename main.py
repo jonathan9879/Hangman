@@ -86,10 +86,7 @@ def player_lost():
 
 # Function that outputs True if the player has won
 def player_won():
-    if None in correct_guesses:
-        return False
-    else:
-        return True
+    return None not in correct_guesses
 
 # Function that processes a turn and return a different number of hangman parts if it has to be changed and correct_guesses changes
 def turn(guess, correct_guesses, n_pieces_left):
@@ -119,7 +116,9 @@ def turn(guess, correct_guesses, n_pieces_left):
 
         return correct_guesses, n_pieces_left - 1 # Update correct n_pieces_left
 
-# Tell players how many letters the host_word has
+# Tell players how many letters the host_word has and new blank lines so the other players can't see the answer
+for i in range(20):
+    print('\n')
 print('The host has chosen a word with ' + str(len(host_word)) + ' letters in it')
 
 # Show screen and define "pen"
@@ -140,11 +139,11 @@ for i in range(100):
             print('Maximum times of tries reached. Exiting now.')
             exit()
 
-        # Make input lower case
-        guess.lower()
+        guess_l = guess.lower()
+        print(guess_l)
 
         # Run a turn with the guess and update correct_guesses and n_pieces_left
-        correct_guesses, n_pieces_left = turn(guess, correct_guesses, n_pieces_left)
+        correct_guesses, n_pieces_left = turn(guess_l, correct_guesses, n_pieces_left)
     else:
         break
 
