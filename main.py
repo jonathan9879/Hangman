@@ -1,5 +1,8 @@
+# Import turtle, a simple drawing library
+import turtle
+
 # Host word variable and number of hangman pieces left variable
-host_word = input('Roses are red, Violets are blue... What are you!? Where are you!?\nAs the master player \"Host\" you will have the important task of choosing the letter that the players will have to guess! Now choose a letter: ')
+host_word = input('Roses are red, Violets are blue... What are you!? Where are you!?\nAs the master player \"Host\" you will have the important task of choosing the word that the players will have to guess! Now choose a word: ')
 n_pieces_left = 7
 
 # Easter eggs
@@ -21,7 +24,58 @@ host_word.lower()
 correct_guesses = [None] * len(host_word)
 
 # Dictionary for pieces of hangman
-hangman_parts = {7: 'upside down L', 6: 'head', 5: 'body', 4: 'arm', 3: 'arm', 2: 'leg', 1: 'leg', 0: 'death'}
+hangman_parts = {7: 'upside down L', 6: 'head', 5: 'body', 4: 'arm', 3: 'arm', 2: 'leg', 1: 'leg'}
+
+# Define Hangman drawings for turtle library
+def draw_hangman_piece(piece, pen):
+    if piece == 7:
+        for i in range(2):
+            pen.left(90)
+            pen.forward(250)
+    elif piece == 6:
+        pen.left(90)
+        pen.forward(25)
+        pen.right(90)
+        pen.circle(25)
+    elif piece == 5:
+        pen.penup()
+        pen.left(90)
+        pen.forward(50)
+        pen.pendown()
+        pen.forward(105)
+    elif piece == 4:
+        pen.penup()
+        pen.right(180)
+        pen.forward(70)
+        pen.pendown()
+        pen.left(135)
+        pen.forward(60)
+    elif piece == 3:
+        pen.right(180)
+        pen.penup()
+        pen.forward(60)
+        pen.right(90)
+        pen.pendown()
+        pen.forward(60)
+    elif piece == 2:
+        pen.penup()
+        pen.right(180)
+        pen.forward(60)
+        pen.left(135)
+        pen.forward(70)
+        pen.right(45)
+        pen.pendown()
+        pen.forward(60)
+    elif piece == 1:
+        pen.right(180)
+        pen.penup()
+        pen.forward(60)
+        pen.right(90)
+        pen.pendown()
+        pen.forward(60)
+
+
+
 
 # Function that outputs True if the player has lost
 def player_lost():
@@ -39,7 +93,7 @@ def player_won():
 
 # Function that processes a turn and return a different number of hangman parts if it has to be changed and correct_guesses changes
 def turn(guess, correct_guesses, n_pieces_left):
-    # Variables to do updates
+    # Copy of correct_guesses_list to do updates
     correct_guesses_out = correct_guesses
 
     if guess in correct_guesses: # If letter has already been guessed ask for a new letter 100 times, if problem persists exit
@@ -52,16 +106,26 @@ def turn(guess, correct_guesses, n_pieces_left):
             exit()
 
     if guess in host_word:  # If letter hasn't been guessed and is correct save it in the correct index in correct_guesses
+        print('Correct! ' + guess + ' has been found')
+        print('Here are the positions were it has been found')
         for index, char in enumerate(host_word):
             if char == guess:
                 correct_guesses_out[index] = guess  # Update correct_guesses_out
+                print(index + 1)
         return correct_guesses_out, n_pieces_left
     else: # If letter hasn't been guessed and is incorrect draw the corresponding hangman piece and substract one to n_pieces_left
-        print('The host draws a: ' + hangman_parts[n_pieces_left])
+        print('Wrong letter... The host draw a: ' + hangman_parts[n_pieces_left])
+        draw_hangman_piece(n_pieces_left, pen)
+
         return correct_guesses, n_pieces_left - 1 # Update correct n_pieces_left
 
 # Tell players how many letters the host_word has
 print('The host has chosen a word with ' + str(len(host_word)) + ' letters in it')
+
+# Show screen and define "pen"
+screen = turtle.Screen()
+pen = turtle.RawPen(screen)
+pen.hideturtle()
 
 # For 100 times, if there isn't a clear winner or losser continue asking for letters and runnning turns
 for i in range(100):
@@ -86,6 +150,6 @@ for i in range(100):
 
 # Print message depending if the player won or host won
 if player_lost():
-    print('Congrats you have lost! Lossing is a part of learning so, don\'t worry, in a way you haven\'t won. But not here lol. You actually lost. lol lol lol')
+    a = input('Congrats you have lost! Lossing is a part of learning so, don\'t worry, in a way you haven\'t won. But not here lol. You actually lost. lol lol lol')
 else:
     print('Incredible! Amazing! Wonderful! Congrats, you actually won! Who would have said it...')
