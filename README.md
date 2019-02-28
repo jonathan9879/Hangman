@@ -13,7 +13,7 @@ To make this program simpler version 1.0 will work only with one letter instead 
 - The program will be able to ask players for letters until either a player has figured out what word it was or they have lost the game because all the marks have been "drawn".
 - The program has to be able to inform the player how the game is going until it finishes.
 
-## Ideas for feature versions
+## Ideas for future versions
 - The host can input words.
 - The host can input phrases.
 - The host can be the machine
