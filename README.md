@@ -14,12 +14,12 @@ To make this program simpler version 1.0 will work only with one letter instead 
 - The program has to be able to inform the player how the game is going until it finishes.
 
 ## Ideas for future versions
-- The host can input words.
+- The host can input words. (Done)
 - The host can input phrases.
 - The host can be the machine
 - The players can input number of players and names, and this info is used to give context.
 - There is a version for kids.
-- The machine draws the hangman instead of giving the info written.
+- The machine draws the hangman instead of giving the info written. (Done)
 - The players can use speech recognition as an input.
 - Check for existence of word in the dictionary.
 
