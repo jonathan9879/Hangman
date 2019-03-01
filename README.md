@@ -16,7 +16,7 @@ To make this program simpler version 1.0 will work only with one letter instead 
 ## Ideas for future versions
 - The host can input words. (Done)
 - The host can input phrases.
-- The host can be the machine
+- The host can be the machine. (Done)
 - The players can input number of players and names, and this info is used to give context.
 - There is a version for kids.
 - The machine draws the hangman instead of giving the info written. (Done)
@@ -31,9 +31,19 @@ To make this program simpler version 1.0 will work only with one letter instead 
 
 - correct_guesses: Stores a list that contains all the letters that have been already succsesfully guessed. It's length is the same is host_word.
 
+- english_words: Stores a list of easy english words for the computer to chose from.
+
+- hangman_parts: Stores a dictionary that as keys has numbers from 7 to 1 and as values the part the hangman loses for each stage of the game.
+
+- screen: The turtle library screen.
+
+- pen: The turtle library pen.
+
 ## Functions
-- process_turn(letter): It inputs a letter choosen by a player. If the letter has already been discovered it asks again for a letter. If it hasn't been discovered yet and it is a correct guess, it saves the letter in it's corresponding index in correct_guesses (if no letters to dicover the player has won). If the letter is a wrong guess, it draws the corresponding hangman part (if no parts left the player has lost). It returns None.
+- turn(guess, correct_guess, n_pieces_left): It inputs a letter choosen by a player. If the letter has already been discovered it asks again for a letter. If it hasn't been discovered yet and it is a correct guess, it saves the letter in it's corresponding index in correct_guesses (if no letters to dicover the player has won). If the letter is a wrong guess, it draws the corresponding hangman part (if no parts left the player has lost). It returns an updated correct_guess list and and updated n_pieces_left.
 
 - player_lost(): If there aren't more hangman parts to draw return True. Else return False.
 
 - player_won(): If there aren't more letters to discover return True. Else return False.
+
+- draw_hangman_pieces(piece, pen): It draws a the corresponding hangman part.
