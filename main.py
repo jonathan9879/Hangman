@@ -1,32 +1,39 @@
 # Import turtle, a simple drawing library
 import turtle
+import random
 
-# List of english words
+# List of english words and declare number of hangman pieces left variable
 english_words = ['back', 'cheeks', 'chest', 'chin', 'ears', 'eyebrows', 'eyes', 'feet', 'fingers', 'foot', 'forehead', 'hair', 'hands', 'head', 'hips', 'knees', 'legs', 'lips', 'mouth', 'neck' , 'nose<', 'shoulders', 'teeth', 'stomach', 'teeth', 'throat', 'toes', 'tongue', 'tooth', 'waist'
-                 'alligator', 'ant', 'bear', 'bee', 'bird', 'camel', 'cat', 'cheetah', 'chicken', 'chimpanzee', 'cow', 'crocodile', 'deer', 'dog', 'dolphin', 'duck', 'eagle', 'elephant', 'fish', 'fly', 'fox', 'frog', 'giraffe', 'goat', 'goldfish', 'hamster', 'hippopotamus', 'horse', 'kangaroo', 'kitten', 'lion', 'lobster', 'monkey', 'octopus', 'owl', 'panda', 'pig', 'puppy', 'rabbit', 'rat', 'scorpion', 'seal', 'shark', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'tiger', 'turtle', 'wolf', 'zebra',
-                 ]
-
-# Host word variable and number of hangman pieces left variable
-host_word = input('Roses are red, Violets are blue... What are you!? Where are you!?\nAs the master player \"Host\" you will have the important task of choosing the word that the players will have to guess! Now choose a word: ')
+                 'alligator', 'ant', 'bear', 'bee', 'bird', 'camel', 'cat', 'cheetah', 'chicken', 'chimpanzee', 'cow', 'crocodile', 'deer', 'dog', 'dolphin', 'duck', 'eagle', 'elephant', 'fish', 'fly', 'fox', 'frog', 'giraffe', 'goat', 'goldfish', 'hamster', 'hippopotamus', 'horse', 'kangaroo', 'kitten', 'lion', 'lobster', 'monkey', 'octopus', 'owl', 'panda', 'pig', 'puppy', 'rabbit', 'rat', 'scorpion', 'seal', 'shark', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'tiger', 'turtle', 'wolf', 'zebra']
 n_pieces_left = 7
 
-# Easter eggs
-if host_word in ['penguin', 'Penguin', 'human', 'Human', 'ironhack', 'Ironhack']:
-    print('Congrats! You have found the hidden easter egg! You are awesome!')
-    exit()
+# Choose if the host is the machine or a human
+machine_host_option = input('Choose who you want the \"Host\" to be. If you want the word to be chosen by the machine type something and then press enter. If you want a a human to chose the word, just press enter.')
+
+if not machine_host_option:
+    # Input host word variable
+    host_word = input('Roses are red, Violets are blue... What are you!? Where are you!?\nAs the master player \"Host\" you will have the important task of choosing the word that the players will have to guess! Now choose a word: ')
 
 # Checks if input is in alphabet and at least 1 letter for 100 times, if problem persists exit
-for i in range(100):
+    for i in range(100):
+        if not host_word.isalpha() or len(host_word) == 0:
+            host_word = input('Please remember to only one word. Not a number, not a phrase, just a word. Try again! ')
     if not host_word.isalpha() or len(host_word) == 0:
-        host_word = input('Please remember to only one word. Not a number, not a phrase, just a word. Try again! ')
-if not host_word.isalpha() or len(host_word) == 0:
-    exit()
+        exit()
 
 # Make input lower case
-host_word.lower()
+    host_word.lower()
+
+else:
+    host_word = random.choice(english_words)
 
 # Correct guesses variable
-correct_guesses = [None] * len(host_word)
+correct_guesses = ['-'] * len(host_word)
+
+# Easter eggs
+if host_word in ['penguin', 'a human', 'a penguin', 'person', 'a person', 'human', 'barcelona', 'ironhack', 'ironhack campus', 'catalonia', 'spain', 'marina', 'earth', 'planet earth', 'the galaxy']:
+    print('Congrats! You have found the hidden easter egg! You are awesome!')
+    exit()
 
 # Dictionary for pieces of hangman
 hangman_parts = {7: 'upside down L', 6: 'head', 5: 'body', 4: 'arm', 3: 'arm', 2: 'leg', 1: 'leg'}
@@ -91,7 +98,7 @@ def player_lost():
 
 # Function that outputs True if the player has won
 def player_won():
-    return None not in correct_guesses
+    return '-' not in correct_guesses
 
 # Function that processes a turn and return a different number of hangman parts if it has to be changed and correct_guesses changes
 def turn(guess, correct_guesses, n_pieces_left):
@@ -109,11 +116,12 @@ def turn(guess, correct_guesses, n_pieces_left):
 
     if guess in host_word:  # If letter hasn't been guessed and is correct save it in the correct index in correct_guesses
         print('Correct! ' + guess + ' has been found')
-        print('Here are the positions were it has been found')
         for index, char in enumerate(host_word):
             if char == guess:
                 correct_guesses_out[index] = guess  # Update correct_guesses_out
-                print(index + 1)
+        # Print correct guesses list for player context
+        print(correct_guesses_out)
+
         return correct_guesses_out, n_pieces_left
     else: # If letter hasn't been guessed and is incorrect draw the corresponding hangman piece and substract one to n_pieces_left
         print('Wrong letter... The host draw a: ' + hangman_parts[n_pieces_left])
@@ -145,7 +153,6 @@ for i in range(100):
             exit()
 
         guess_l = guess.lower()
-        print(guess_l)
 
         # Run a turn with the guess and update correct_guesses and n_pieces_left
         correct_guesses, n_pieces_left = turn(guess_l, correct_guesses, n_pieces_left)

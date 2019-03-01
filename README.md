@@ -23,6 +23,7 @@ To make this program simpler version 1.0 will work only with one letter instead 
 - The players can use speech recognition as an input.
 - Check for existence of word in the dictionary.
 
+
 ## Variables
 - host_word: Stores a string with the word/letter/phrase choseen by the host
 
